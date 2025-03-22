@@ -6,15 +6,25 @@ const addDue = async (req, res, next) => {
       customerName,
       totalAmount, 
       mobileNo,
-      paidDate     
+      paidDate,
+      notes,
+      dueType     
     } = req.body;
+    // console.log("", req.body)
     const due = await dueService.addDue({
         customerName,
         totalAmount,
         mobileNo,
         paidDate,
+        dueType,
         dueAmount: totalAmount,
         status: "Unpaid",
+        addedAmountTransactions:[
+          {
+            amount: totalAmount,
+            notes: notes
+          }
+        ],
         transactions: []
     });
     res.status(200).json(due);

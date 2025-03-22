@@ -3,6 +3,7 @@ const {createOrReplaceAdmin} = require('@root/lib/auth/createOrReplaceAdmin');
 
 
 let connectionURI = process.env.DB_URI;
+// let connectionURI = process.env.DB_CONNECTION_URL;
 
 // replace the
 // connectionURI = connectionURI.replace('<username>', process.env.DB_USERNAME);

@@ -8,6 +8,10 @@ const sellSchema = new Schema({
         ref: 'Product',
         required: true
     },
+    imei: {
+        type: String,
+        required: true
+    },
     quantity: {
         type: Number,
         required: true
@@ -16,16 +20,42 @@ const sellSchema = new Schema({
         type: Number,
         required: true
     },
-    // branch: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Branch',
-    //     required: true
-    // },
-    // customer: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Customer',
-    //     required: true
-    // },
+    paymentDetails: {
+        bkash: {
+            type: Number,
+            default: 0
+        },
+        nagad: {
+            type: Number,
+            default: 0
+        },
+        cash: {
+            type: Number,
+            default: 0
+        },
+        dbbl: {
+            type: Number,
+            default: 0
+        },
+        bank: {
+            type: Number,
+            default: 0
+        }
+    },
+    customerDetails: {
+        customerName: {
+            type: String,
+            required: true
+        },
+        mobileNo: {
+            type: String,
+            required: true
+        },
+        address: {
+            type: String,
+            required: true
+        }
+    },
     date: {
         type: Date,
         default: date.toLocaleDateString()

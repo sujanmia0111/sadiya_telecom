@@ -1,8 +1,33 @@
 const {Schema, model} = require('mongoose');
 
+
+const supplierSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    mobileNo: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+});
+
 const productSchema = new Schema({
     productName: {
         type: String,
+        required: true
+    },
+    productType: {
+        type: String,
+        enum: ["mobile","accessories"],
         required: true
     },
     quantity: {
@@ -21,11 +46,10 @@ const productSchema = new Schema({
         type: Number,
         required: true
     },
-    // branch: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Branch',
-    //     required: true
-    // },
+    supplierDetails: {
+        type: supplierSchema,
+        default: null
+    },
     branch:{
         type: String,
         required: true

@@ -3,6 +3,62 @@ const {Schema, model} = require('mongoose');
 
 const date = new Date();
 
+const customerSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    fatherName: {
+        type: String,
+        required: true
+    },
+    motherName: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    mobileNo: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    nidNo: {
+        type: String,
+        required: true
+    },
+    dateOfBirth: {
+        type: String,
+        required: true
+    }
+})
+
+const paymentDetailsSchema = new Schema({
+    bkash: {
+        type: Number,
+        default: 0
+    },
+    nagad: {
+        type: Number,
+        default: 0
+    },
+    cash: {
+        type: Number,
+        default: 0
+    },
+    dbbl: {
+        type: Number,
+        default: 0
+    }
+});
+
+
+
 const buyFromCustomerSchema = new Schema({
     branchDetails: {
         type: String,      
@@ -13,38 +69,8 @@ const buyFromCustomerSchema = new Schema({
         required: true
     },
     customerDetails: {
-        name: {
-            type: String,
-            required: true
-        },
-        fatherName: {
-            type: String,
-            required: true
-        },
-        motherName: {
-            type: String,
-            required: true
-        },
-        address: {
-            type: String,
-            required: true
-        },
-        mobileNo: {
-            type: String,
-            required: true
-        },
-        email: {
-            type: String,
-            required: true
-        },
-        nidNo: {
-            type: String,
-            required: true
-        },
-        dateOfBirth: {
-            type: String,
-            required: true
-        }
+        type: customerSchema,
+        required: true
     },
     productDetails: {
         productType: {
@@ -67,6 +93,10 @@ const buyFromCustomerSchema = new Schema({
             type: String,
             required: true
         }
+    },
+    paymentDetails: {
+        type: paymentDetailsSchema,
+        required: true
     },
     price: {
         type: Number,
@@ -97,3 +127,37 @@ const buyFromCustomerSchema = new Schema({
 },{ timestamps: true});
 
 module.exports = model('BuyFromCustomer', buyFromCustomerSchema);
+
+
+// name: {
+//     type: String,
+//     required: true
+// },
+// fatherName: {
+//     type: String,
+//     required: true
+// },
+// motherName: {
+//     type: String,
+//     required: true
+// },
+// address: {
+//     type: String,
+//     required: true
+// },
+// mobileNo: {
+//     type: String,
+//     required: true
+// },
+// email: {
+//     type: String,
+//     required: true
+// },
+// nidNo: {
+//     type: String,
+//     required: true
+// },
+// dateOfBirth: {
+//     type: String,
+//     required: true
+// }

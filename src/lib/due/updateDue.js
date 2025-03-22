@@ -1,4 +1,5 @@
 const Due = require("@root/models/due");
+const Accounts = require('@root/models/accounts');
 
 const updateDue = async (id, data) => {
   const { amount, method } = data;
@@ -15,6 +16,17 @@ const updateDue = async (id, data) => {
   } else {
     due.status = "Partially Paid";
   }
+
+  const account = await Accounts.findOne().sort({ createdAt: -1});
+  
+  if(due.dueType === "customer") {
+    account[method] += amount
+  } else {
+    account[method] -= amount;
+  }
+
+  await account.save();
+
 
   const updatedDue = await due.save();
   return updatedDue;

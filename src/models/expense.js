@@ -1,5 +1,8 @@
 const {Schema, model} = require('mongoose');
 
+
+const date = new Date();
+
 const expenseSchema = new Schema({
     amount: {
         type: Number,
@@ -11,13 +14,13 @@ const expenseSchema = new Schema({
     },
     date: {
         type: Date,
-        required: true
+        default: date.toLocaleDateString()
     },
-    branch: {
+    expenseBy: {
         type: Schema.Types.ObjectId,
-        ref: 'Branch',
+        ref: 'User',
         required: true
-    },
+    }
 }, { timestamps: true});
 
 module.exports = model('Expense', expenseSchema);

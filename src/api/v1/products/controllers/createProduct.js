@@ -3,14 +3,16 @@ const productService = require("@root/lib/products");
 const createProduct = async (req, res, next) => {
   try {
 
-    const { productName, quantity, rpPrice, buyPrice, sellPrice, branch } = req.body;
+    const { productName,productType, quantity, rpPrice, buyPrice, sellPrice, branch, supplierDetails } = req.body;
 
     const product = await productService.createProduct({
       productName,
+      productType,
       quantity,
       rpPrice,
       buyPrice,
       sellPrice,
+      supplierDetails: supplierDetails?.name !== "" ? supplierDetails : null,
       branch,
       estimatedProfit: rpPrice - buyPrice,
       createdBy: req.user._id

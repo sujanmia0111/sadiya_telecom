@@ -7,11 +7,20 @@ const { controllers: sellControllers} = require('@controllers/sell');
 const { controllers: dueControllers} = require('@controllers/due');
 const { controllers: accountControllers} = require('@controllers/accounts');
 const { controllers: userControllers} = require('@controllers/user');
+const { controllers: expenseControllers} = require('@controllers/expense');
+const dashboardControllers  = require('@controllers/dashboard');
 
 
 // middleware -- check authentication
 const { checkAuthenticate } = require('@root/middlewares/checkAuthenticate');
 
+
+// dashboard controllers 
+router.get(
+    '/api/v1/dashboard',
+    checkAuthenticate,
+    dashboardControllers.getDashboard
+)
 
 // admin login routes
 router.post(
@@ -141,6 +150,12 @@ router.put(
     dueControllers.updateDue
 )
 
+router.put(
+    '/api/v1/due/addAmount/:id',
+    checkAuthenticate,
+    dueControllers.addAmount
+)
+
 router.delete(
     '/api/v1/due/:id',
     checkAuthenticate,
@@ -164,6 +179,26 @@ router.put(
     '/api/v1/accounts/:id',
     checkAuthenticate,
     accountControllers.updateAccount
+)
+
+
+// expenses
+router.get(
+    '/api/v1/expense',
+    checkAuthenticate,
+    expenseControllers.getAllExpenses
+)
+
+router.post(
+    '/api/v1/expense',
+    checkAuthenticate,
+    expenseControllers.addExpense
+)
+
+router.put(
+    '/api/v1/expense/:id',
+    checkAuthenticate,
+    expenseControllers.updateExpense
 )
 
 

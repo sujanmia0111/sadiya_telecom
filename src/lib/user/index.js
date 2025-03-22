@@ -82,9 +82,9 @@ const updateUser = async (id,user) => {
     if(!userExist){
         throw notFound("User not found");
     }
+    const updatePassword = user.password ? await generateHashed(user.password) : userExist.password;
+    user.password = updatePassword;
     const updatedUser = await User.findByIdAndUpdate(id, user, {new: true}).select("-password -__v");
-    
-   
     
     return {
         ...updatedUser._doc,
