@@ -4,6 +4,14 @@ const Products = require("@root/models/products");
 const Expense = require("@root/models/expense");
 
 const getDashboard = async () => {
+  let startDate, endDate;
+
+  // Set start and end of the current day
+  startDate = new Date();
+  startDate.setUTCHours(0, 0, 0, 0);
+  endDate = new Date();
+  endDate.setUTCHours(23, 59, 59, 999);
+
   const account = await Accounts.findOne().sort({ createdAt: -1 });
 
   const customerDue = await Due.aggregate([
@@ -27,8 +35,18 @@ const getDashboard = async () => {
   ]);
 
   const totalExpense = await Expense.aggregate([
+    {
+      $match: {
+        date: {
+          $gte: startDate,
+          $lte: endDate,
+        },
+      },
+    },
     { $group: { _id: null, totalAmount: { $sum: "$amount" } } },
   ]);
+
+  // console.log(totalExpense);
 
   const dashboard = {
     bkash: account?.bkash || 0,
