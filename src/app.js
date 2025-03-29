@@ -25,7 +25,7 @@ app.get("*", (req, res) => {
 
 
 // server is ready
-app.use("/ok", (_req, res, _next) => {
+app.use("/api/v1/ok", (_req, res, _next) => {
   res.status(200).json({
     message: "server is up and running",
   });
@@ -92,7 +92,7 @@ app.use((err, _req, res, _next) => {
     message: "Internal Server Error",
   };
 
-  console.log(err.response);
+  // console.log(err.response);
 
   res.status(err.status || 500).json(err.response || internalServerError);
 });

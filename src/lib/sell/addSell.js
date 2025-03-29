@@ -24,7 +24,7 @@ const addSell = async (data) => {
         accounts[method] += amount;
         await accounts.save();
 
-        if(method === "due"){
+        if(method === "due" && amount > 0) {
             await Due.create({
                 customerName: data.customerDetails.customerName,
                 dueType: "customer",

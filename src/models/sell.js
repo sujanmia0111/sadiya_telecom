@@ -40,6 +40,10 @@ const sellSchema = new Schema({
         bank: {
             type: Number,
             default: 0
+        },
+        due: {
+            type: Number,
+            default: 0
         }
     },
     customerDetails: {
@@ -58,7 +62,11 @@ const sellSchema = new Schema({
     },
     date: {
         type: Date,
-        default: date.toLocaleDateString()
+        default: date.toISOString()
+    },
+    dueDate: {
+        type: String,
+        default: ""
     },
     soldBy: {
         type: Schema.Types.ObjectId,

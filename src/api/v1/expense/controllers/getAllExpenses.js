@@ -2,8 +2,12 @@ const expenseService = require('@root/lib/expenses');
 
 const getAllExpenses = async (req, res, next) => {
     try {
-        const expenses = await expenseService.getAllExpenses();
-        console.log(expenses);
+        let { filterDate, type } = req.query;
+        const expenses = await expenseService.getAllExpenses(
+            filterDate = filterDate? filterDate : null,
+            type = type ? type : "today"
+        );
+        // console.log(expenses);
         res.status(200).json(expenses);
     } catch (error) {
         next(error);
